@@ -1,25 +1,31 @@
 @extends('layouts.master')
 
+@push('head')
+    <link href='/css/books.css' rel='stylesheet'>
+@endpush
 
 @section('title')
-    Show book
+    {{ $book->title }}
 @endsection
-
-
-@push('head')
-    <link href="/css/books/show.css" type='text/css' rel='stylesheet'>
-@endpush
-
 
 @section('content')
-    @if($title)
-        <h1>Show book: {{ $title }}</h1>
-    @else
-        <h1>No book chosen</h1>
-    @endif
+
+    <div class='book cf'>
+
+        <h1>{{ $book->title }}</h1>
+
+        <a href='/books/{{ $book->id }}'><img class='cover' src='{{ $book->cover }}' alt='Cover for {{ $book->title }}'></a>
+
+        <p>Published: {{ $book->published}}</p>
+
+        <p>Added on: {{ $book->created_at }}</p>
+
+        <p>Last updated: {{ $book->updated_at }}</p>
+
+        <p><a href='{{$book->purchase_link}}'>Purchase this book...</a></p>
+
+        <a class='bookAction' href='/books/edit/{{ $book->id }}'><i class='fa fa-pencil'></i></a>
+        <a class='bookAction' href='/books/{{ $book->id }}/delete'><i class='fa fa-trash'></i></a>
+
+    </div>
 @endsection
-
-
-@push('body')
-    <script src="/js/books/show.js"></script>
-@endpush
